@@ -17,13 +17,14 @@ void brute_force_matmul(double mat1[MAT_SIZE][MAT_SIZE], double mat2[MAT_SIZE][M
     }
 }
 
-void p(double a[MAT_SIZE][MAT_SIZE]) {
+void display(double a[MAT_SIZE][MAT_SIZE]) {
     for (int i = 0; i < MAT_SIZE; i++) {
         for (int j = 0; j < MAT_SIZE; j++) printf("%.0f ", a[i][j]);
         printf("\n");
     }
     printf("\n");
 }
+
 int main(int argc, char *argv[])
 {
    int rank;
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
    MPI_Init(NULL, NULL);
    MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-   int num_row_per_proc = MAT_SIZE / mpiSize;
+   int num_row_per_proc = MAT_SIZE / mpiSize + 1;
 
    if (rank == 0)
    {
