@@ -1,3 +1,5 @@
+package example.foo;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
