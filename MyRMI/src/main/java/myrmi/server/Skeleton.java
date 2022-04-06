@@ -1,7 +1,6 @@
 package myrmi.server;
 
 import myrmi.Remote;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -36,13 +35,24 @@ public class Skeleton extends Thread {
 
     @Override
     public void run() {
-        /*TODO: implement method here
-         * You need to:
-         * 1. create a server socket to listen for incoming connections
-         * 2. use a handler thread to process each request (use SkeletonReqHandler)
-         *  */
+        try {
+            // TODO: how to listen to different host?
+            ServerSocket serverSocket = new ServerSocket(this.port);
+            // serverSocket.setSoTimeout(10000);
+            System.out.println("Server is listening on port" + serverSocket.getLocalPort());
 
-        throw new NotImplementedException();
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Client" + socket.getInetAddress() + "has connected to the server.");
 
+                SkeletonReqHandler reqHandler = new SkeletonReqHandler(socket, this.remoteObj, this.objectKey);
+                reqHandler.start();
+
+                // socket.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
