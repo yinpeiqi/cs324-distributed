@@ -64,6 +64,7 @@ public class SkeletonReqHandler extends Thread {
 
             objectInputStream.close();
             objectOutputStream.close();
+            this.socket.close();
         }
         catch (IOException | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();

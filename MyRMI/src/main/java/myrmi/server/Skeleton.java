@@ -3,10 +3,8 @@ package myrmi.server;
 import myrmi.Remote;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class Skeleton extends Thread {
     static final int BACKLOG = 5;
@@ -38,17 +36,14 @@ public class Skeleton extends Thread {
         try {
             // TODO: how to listen to different host?
             ServerSocket serverSocket = new ServerSocket(this.port);
-            // serverSocket.setSoTimeout(10000);
-            System.out.println("Server is listening on port" + serverSocket.getLocalPort());
+            System.out.println("Server is listening on port " + serverSocket.getLocalPort());
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("Client" + socket.getInetAddress() + "has connected to the server.");
+                System.out.println("Client " + socket.getInetAddress() + ":" + socket.getLocalPort() + " has connected to the server.");
 
                 SkeletonReqHandler reqHandler = new SkeletonReqHandler(socket, this.remoteObj, this.objectKey);
                 reqHandler.start();
-
-                // socket.close();
             }
         }
         catch (IOException e) {

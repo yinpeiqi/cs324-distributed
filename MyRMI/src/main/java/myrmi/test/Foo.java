@@ -14,4 +14,8 @@ public class Foo extends UnicastRemoteObject implements IFoo{
     public String getMessage() throws RemoteException {
         return this.message;
     }
+
+    public void printMessage() throws RemoteException {
+        System.out.println(this.message);
+    }
 }

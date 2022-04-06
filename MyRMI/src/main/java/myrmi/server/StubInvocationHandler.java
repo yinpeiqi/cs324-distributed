@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class StubInvocationHandler implements InvocationHandler, Serializable {
@@ -32,7 +31,6 @@ public class StubInvocationHandler implements InvocationHandler, Serializable {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws RemoteException, IOException, ClassNotFoundException, Throwable {
-        // TODO: Where to use Proxy?
         Object result = null;
         try {
             Socket client = new Socket(this.host, this.port);

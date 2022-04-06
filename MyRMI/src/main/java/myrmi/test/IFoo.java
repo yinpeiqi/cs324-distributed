@@ -5,4 +5,6 @@ import myrmi.exception.RemoteException;
 
 public interface IFoo extends Remote {
     public String getMessage() throws RemoteException;
+
+    public void printMessage() throws RemoteException;
 }

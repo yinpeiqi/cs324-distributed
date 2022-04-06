@@ -9,5 +9,6 @@ public class Client {
         Registry r = LocateRegistry.getRegistry();
         IFoo foo = (IFoo) r.lookup("remoteFoo");
         System.out.println(foo.getMessage());
+        foo.printMessage();
     }
 }

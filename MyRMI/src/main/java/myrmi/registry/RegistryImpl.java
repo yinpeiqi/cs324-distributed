@@ -6,11 +6,7 @@ import myrmi.exception.NotBoundException;
 import myrmi.exception.RemoteException;
 import myrmi.server.Skeleton;
 
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Set;
 
 public class RegistryImpl implements Registry {
     private final HashMap<String, Remote> bindings = new HashMap<>();
@@ -24,6 +20,10 @@ public class RegistryImpl implements Registry {
         skeleton.start();
     }
 
+    public RegistryImpl(String host, int port) throws RemoteException {
+        Skeleton skeleton = new Skeleton(this, host, port, 0);
+        skeleton.start();
+    }
 
     public Remote lookup(String name) throws RemoteException, NotBoundException {
         System.out.printf("RegistryImpl: lookup(%s)\n", name);

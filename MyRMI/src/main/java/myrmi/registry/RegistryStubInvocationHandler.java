@@ -33,8 +33,7 @@ public class RegistryStubInvocationHandler implements InvocationHandler {
             throw e.getCause();
         }
         if ("lookup".equals(method.getName())) {
-            assert (args.length == 1);
-            result = (Remote) method.invoke(this.registryStub, args);
+            result = (Remote) result;
             //TODO: Here you need special handling for invoking ``lookup'' method,
             // because it returns the stub of a remote object
         }

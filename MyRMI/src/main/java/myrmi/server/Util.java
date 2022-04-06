@@ -10,6 +10,7 @@ public class Util {
 
     public static Remote createStub(RemoteObjectRef ref) {
         StubInvocationHandler invocationHandler = new StubInvocationHandler(ref);
+        // here I failed in using reflection, since registry and unicastRemoteObject use different args.
         if (ref.getInterfaceName().equals("myrmi.registry.Registry")) {
             return (Registry) Proxy.newProxyInstance(
                 Registry.class.getClassLoader(),
@@ -22,7 +23,6 @@ public class Util {
                 UnicastRemoteObject.class.getInterfaces(),
                 invocationHandler);
         }
-        //TODO: finish here, instantiate an StubInvocationHandler for ref and then return a stub
     }
 
 }
