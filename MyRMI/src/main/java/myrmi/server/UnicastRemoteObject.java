@@ -2,7 +2,6 @@ package myrmi.server;
 
 import myrmi.Remote;
 import myrmi.exception.RemoteException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 public class UnicastRemoteObject implements Remote, java.io.Serializable {
@@ -29,8 +28,14 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
      * 1. create a skeleton of the given object ``obj'' and bind with the address ``host:port''
      * 2. return a stub of the object ( Util.createStub() )
      **/
+    static int totalObject = 0;
     public static Remote exportObject(Remote obj, String host, int port) throws RemoteException {
-        //TODO: finish here
-        throw new NotImplementedException();
+        int objectKey = totalObject;
+        totalObject++;
+        RemoteObjectRef registryRef = new RemoteObjectRef(host, port, objectKey, "myrmi.server.UnicastRemoteObject");
+        Skeleton skeleton = new Skeleton(obj, registryRef);
+        skeleton.start();
+
+        return Util.createStub(registryRef);
     }
 }
