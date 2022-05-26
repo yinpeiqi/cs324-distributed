@@ -1,13 +1,13 @@
-cd /root/cs324-distributed/MyRMI/
+cd /root/cs324-distributed/HW4/
 if [ "$RUN_COMPONENT" == "SERVER" ]; then
 echo "Run server!"
-java -classpath target/classes/ myrmi.test.Main &
+java -classpath target/ demo.Server &
 elif [ "$RUN_COMPONENT" == "REGISTRY" ]; then
 echo "Run registry!"
-java -classpath target/classes -Djava.rmi.server.codebase=file:target/classes myrmi.registry.Main &
+java -classpath target/ -Djava.rmi.server.codebase=file:target demo.Registry &
 elif [ "$RUN_COMPONENT" == "CLIENT" ]; then
 echo "Run client!"
-java -classpath target/classes/ myrmi.test.Client
+java -classpath target/ demo.Client 80000 .065 15
 else
 echo "Error: No component specified!"
 fi
